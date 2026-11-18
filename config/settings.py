@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-xbru=^p)sg9r-t8rifk740hn3%gean(5fw0fb%x(u8i*#$l*mk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ALLOWED_HOSTS = ["eldor-website.onrender.com"]
+]
 
 
 # Application definition
