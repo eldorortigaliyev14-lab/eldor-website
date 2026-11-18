@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#183c32">
+    <meta name="description" content="ELDOR FOOD — mazali taomlar, desertlar va ichimliklar.">
+    <title>ELDOR FOOD | Mazali taomlar</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--ink:#1d2924;--muted:#78817b;--green:#183c32;--orange:#e88947;--cream:#f7f5ef;--line:#e9e7df}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth;scroll-padding-top:85px}
+        body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+        button,input{font:inherit}
+        a{color:inherit;text-decoration:none}
+        .wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+        .topbar{position:sticky;z-index:10;top:0;background:rgba(247,245,239,.95);border-bottom:1px solid rgba(29,41,36,.07);backdrop-filter:blur(14px)}
+        .header{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+        .brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800;letter-spacing:-.6px}
+        .brand-icon{display:grid;width:42px;height:42px;place-items:center;border-radius:14px;background:var(--green);color:white;font-size:22px}
+        .brand span:last-child span{color:var(--orange)}
+        nav{display:flex;gap:32px;color:#657069;font-size:14px;font-weight:600}
+        nav a:hover{color:var(--orange)}
+        .cart-open,.primary{border:0;border-radius:999px;background:var(--green);color:white;font-weight:700;cursor:pointer}
+        .cart-open{display:flex;align-items:center;gap:9px;padding:11px 16px}
+        .count{display:grid;min-width:22px;height:22px;place-items:center;border-radius:50%;background:var(--orange);font-size:12px}
+        .hero{padding:42px 0 34px}
+        .hero-box{position:relative;display:flex;min-height:450px;align-items:center;overflow:hidden;border-radius:30px;background:radial-gradient(ellipse at 82% 55%,rgba(232,137,71,.2),transparent 35%),linear-gradient(120deg,#183c32,#214b3c);color:white}
+        .hero-copy{position:relative;z-index:2;width:58%;padding:58px 0 58px 64px}
+        .eyebrow,.kicker{color:#f2a66b;font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+        .hero h1{max-width:570px;margin:18px 0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(42px,5.3vw,66px);line-height:1.06;letter-spacing:-1.5px}
+        .hero h1 span{color:#f2a66b}
+        .hero-copy p{max-width:460px;margin:0 0 25px;color:rgba(255,255,255,.77);font-size:15px;line-height:1.8}
+        .primary{display:inline-flex;align-items:center;gap:12px;padding:14px 21px;background:var(--orange)}
+        .hero-photo-wrap{position:absolute;inset:0 0 0 51%;display:grid;place-items:center}
+        .hero-photo-wrap:before,.hero-photo-wrap:after{position:absolute;aspect-ratio:1;border:1px solid rgba(255,255,255,.2);border-radius:50%;content:""}
+        .hero-photo-wrap:before{width:min(430px,82%)}
+        .hero-photo-wrap:after{width:min(350px,67%);border-style:dashed}
+        .hero-photo{position:relative;z-index:1;width:min(345px,67%);aspect-ratio:1;border:9px solid rgba(255,255,255,.12);border-radius:50%;object-fit:cover;box-shadow:0 24px 70px rgba(0,0,0,.3)}
+        .sticker{position:absolute;z-index:2;right:11%;bottom:17%;display:grid;width:91px;height:91px;place-content:center;border:5px solid #214b3c;border-radius:50%;background:#f2a66b;color:#26392e;text-align:center;transform:rotate(8deg)}
+        .sticker strong{font-family:"Playfair Display",Georgia,serif;font-size:25px}
+        .sticker span{font-size:9px;font-weight:800}
+        .features{display:flex;flex-wrap:wrap;gap:24px;padding:23px 8px 0}
+        .feature{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:11px}
+        .feature-icon{display:grid;width:37px;height:37px;place-items:center;border-radius:12px;background:white;font-size:17px}
+        .feature strong{display:block;margin-bottom:3px;color:var(--ink);font-size:12px}
+        .menu{padding:66px 0 82px}
+        .heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:26px}
+        .kicker{margin-bottom:8px;color:var(--orange)}
+        .heading h2,.about h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(33px,4vw,44px);letter-spacing:-.6px}
+        .heading p{max-width:360px;margin:0 0 3px;color:var(--muted);font-size:13px;line-height:1.7}
+        .tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+        .filters{display:flex;flex-wrap:wrap;gap:8px}
+        .filter{border:1px solid var(--line);border-radius:999px;padding:10px 15px;background:transparent;color:#68716b;font-size:12px;font-weight:700;cursor:pointer}
+        .filter:hover,.filter.active{border-color:var(--green);background:var(--green);color:white}
+        .search{display:flex;width:min(250px,100%);align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:white;color:#849087}
+        .search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:12px}
+        .results{margin:0 0 14px;color:var(--muted);font-size:12px}
+        .foods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+        .food{min-width:0;overflow:hidden;border:1px solid rgba(29,41,36,.05);border-radius:19px;background:white;box-shadow:0 7px 23px rgba(34,47,39,.035);transition:transform .2s,box-shadow .2s}
+        .food:hover{transform:translateY(-4px);box-shadow:0 16px 42px rgba(34,47,39,.1)}
+        .food[hidden]{display:none}
+        .photo{position:relative;height:184px;overflow:hidden;background:#e8e5db}
+        .photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+        .food:hover .photo img{transform:scale(1.05)}
+        .tag{position:absolute;top:11px;left:11px;border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.94);color:var(--green);font-size:10px;font-weight:800}
+        .info{padding:14px 15px 15px}
+        .info h3{margin:0 0 6px;font-size:15px}
+        .info p{min-height:35px;margin:0 0 12px;color:var(--muted);font-size:11px;line-height:1.55}
+        .bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+        .price{color:var(--green);font-size:15px;font-weight:800}
+        .price small{color:var(--muted);font-size:10px;font-weight:500}
+        .add{display:grid;width:35px;height:35px;place-items:center;border:0;border-radius:12px;background:#f4eee6;color:#bd6b34;font-size:22px;cursor:pointer}
+        .add:hover{background:var(--orange);color:white}
+        .empty{display:none;padding:45px 20px;border:1px dashed #d6d4ca;border-radius:18px;color:var(--muted);text-align:center}
+        .empty.show{display:block}
+        .about{padding:52px 0;background:#eeeae0}
+        .about-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+        .about p{max-width:600px;margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.75}
+        .about-mark{color:var(--green);font-size:52px}
+        footer{padding:25px 0;background:var(--green);color:rgba(255,255,255,.75);font-size:12px}
+        .footer{display:flex;justify-content:space-between;gap:15px}
+        .footer strong{color:white}
+        .toast{position:fixed;z-index:40;right:22px;bottom:22px;padding:13px 18px;border-radius:13px;background:var(--green);color:white;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(10px);transition:.2s}
+        .toast.show{opacity:1;transform:translateY(0)}
+        .backdrop{position:fixed;z-index:20;inset:0;background:rgba(18,30,24,.4);opacity:0;pointer-events:none;transition:opacity .2s}
+        .backdrop.show{opacity:1;pointer-events:auto}
+        .cart{position:fixed;z-index:30;top:0;right:0;display:flex;width:min(380px,100%);height:100dvh;flex-direction:column;padding:23px;background:white;box-shadow:-15px 0 50px rgba(0,0,0,.15);transform:translateX(105%);transition:transform .25s}
+        .cart.open{transform:translateX(0)}
+        .cart-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:15px;border-bottom:1px solid var(--line)}
+        .cart-head h2{margin:0;font-family:"Playfair Display",Georgia,serif}
+        .close{width:35px;height:35px;border:0;border-radius:50%;background:var(--cream);font-size:21px;cursor:pointer}
+        .cart-items{flex:1;overflow:auto;padding:10px 0}
+        .cart-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+        .cart-row strong{display:block;margin-bottom:4px;font-size:13px}
+        .cart-row span,.remove{color:var(--muted);font-size:11px}
+        .remove{border:0;background:none;color:#b85f48;cursor:pointer}
+        .cart-empty{padding:24px 0;color:var(--muted);font-size:13px;text-align:center}
+        .total{padding-top:16px;border-top:1px solid var(--line)}
+        .total-line{display:flex;justify-content:space-between;margin-bottom:13px;font-weight:800}
+        .checkout{width:100%;border:0;border-radius:12px;padding:14px;background:var(--green);color:white;font-weight:800;cursor:pointer}
+        :focus-visible{outline:3px solid rgba(232,137,71,.7);outline-offset:3px}
+        @media(max-width:1000px){.foods{grid-template-columns:repeat(3,minmax(0,1fr))}}
+        @media(max-width:700px){
+            .wrap{width:min(100% - 32px,540px)}
+            .header{min-height:66px}
+            .brand{font-size:16px}
+            .brand-icon{width:37px;height:37px}
+            nav{display:none}
+            .cart-open{padding:9px 12px;font-size:12px}
+            .hero{padding-top:22px}
+            .hero-box{min-height:0;border-radius:23px}
+            .hero-copy{width:100%;padding:35px 25px 205px}
+            .hero h1{font-size:clamp(40px,11vw,55px)}
+            .hero-copy p{font-size:13px}
+            .hero-photo-wrap{inset:auto 0 -95px 40%;height:285px}
+            .hero-photo{width:200px;border-width:7px}
+            .hero-photo-wrap:before{width:250px}
+            .hero-photo-wrap:after{width:210px}
+            .sticker{right:12%;bottom:43%;width:73px;height:73px;border-width:4px}
+            .sticker strong{font-size:20px}
+            .features{gap:14px 18px;padding:19px 4px 0}
+            .feature{font-size:10px}
+            .feature strong{font-size:11px}
+            .menu{padding:52px 0 62px}
+            .heading{display:block}
+            .heading p{margin-top:10px}
+            .tools{align-items:stretch}
+            .filter{padding:9px 11px;font-size:10px}
+            .search{width:100%}
+            .foods{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+            .photo{height:140px}
+            .info{padding:11px}
+            .info h3{font-size:13px}
+            .info p{min-height:48px;font-size:10px}
+            .price{font-size:12px}
+            .add{width:32px;height:32px}
+            .about h2{font-size:27px}
+            .about p{font-size:12px}
+            .about-mark{font-size:38px}
+            .footer{flex-direction:column}
+        }
+        @media(max-width:370px){.foods{gap:8px}.info{padding:9px}.photo{height:120px}.price{font-size:11px}}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="wrap header">
+            <a class="brand" href="#home" aria-label="ELDOR FOOD bosh sahifasi">
+                <span class="brand-icon" aria-hidden="true">🍽</span>
+                <span>ELDOR <span>FOOD</span></span>
+            </a>
+            <nav aria-label="Asosiy menyu">
+                <a href="#home">Bosh sahifa</a><a href="#menu">Menyu</a><a href="#about">Biz haqimizda</a>
+            </nav>
+            <button class="cart-open" id="openCart" type="button" aria-label="Savatni ochish">🛍 Savat <span class="count" id="cartCount">0</span></button>
+        </div>
+    </header>
+    <main>
+        <section class="hero wrap" id="home">
+            <div class="hero-box">
+                <div class="hero-copy">
+                    <span class="eyebrow">Yangi ta’m, iliq kayfiyat</span>
+                    <h1>Yaxshi taom — <span>yaxshi kun.</span></h1>
+                    <p>Sevimli taomlaringiz mehr bilan tayyorlanadi. Milliy ta’mlardan tortib shirin desertlargacha — hammasi bir menyuda.</p>
+                    <a class="primary" href="#menu">Menyuni ko‘rish <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="hero-photo-wrap" aria-hidden="true">
+                    <img class="hero-photo" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&amp;fit=crop&amp;w=900&amp;q=85" data-fallback-label="Mazali taom" alt="">
+                    <div class="sticker"><strong>52+</strong><span>mazali tanlov</span></div>
+                </div>
+            </div>
+            <div class="features">
+                <div class="feature"><span class="feature-icon">🥬</span><span><strong>Saralangan masalliqlar</strong>Har kuni yangi</span></div>
+                <div class="feature"><span class="feature-icon">👨‍🍳</span><span><strong>Mehr bilan pishiramiz</strong>Uy ta’mi va sifati</span></div>
+                <div class="feature"><span class="feature-icon">💛</span><span><strong>Har kimga mos tanlov</strong>Taom, desert, ichimlik</span></div>
+            </div>
+        </section>
+        <section class="menu" id="menu">
+            <div class="wrap">
+                <div class="heading">
+                    <div><div class="kicker">Mazali tanlovlar</div><h2>Bizning menyu</h2></div>
+                    <p>O‘zingiz yoqtirgan ta’mni toping — har bir taom saralangan masalliqlardan tayyorlanadi.</p>
+                </div>
+                <div class="tools">
+                    <div class="filters" role="group" aria-label="Menyuni turiga qarab filtrlash">
+                        <button class="filter active" type="button" data-filter="all" aria-pressed="true">Hammasi</button>
+                        <button class="filter" type="button" data-filter="taom" aria-pressed="false">Taomlar</button>
+                        <button class="filter" type="button" data-filter="milliy" aria-pressed="false">Milliy taomlar</button>
+                        <button class="filter" type="button" data-filter="desert" aria-pressed="false">Desertlar</button>
+                        <button class="filter" type="button" data-filter="ichimlik" aria-pressed="false">Ichimliklar</button>
+                    </div>
+                    <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Taom qidirish..." aria-label="Menyudan qidirish"></label>
+                </div>
+                <p class="results" id="results" aria-live="polite">52 ta mazali tanlov</p>
+                <div class="foods" id="foods">
+                    {% for product in products %}
+                        <article class="food" data-category="{{ product.category }}" data-search="{{ product.name|lower }} {{ product.description|lower }} {{ product.category_name|lower }}">
+                            <div class="photo">
+                                <img src="{{ product.image }}" data-fallback-label="{{ product.name }}" alt="{{ product.name }}" loading="lazy" decoding="async">
+                                <span class="tag">{{ product.category_name }}</span>
+                            </div>
+                            <div class="info">
+                                <h3>{{ product.name }}</h3>
+                                <p>{{ product.description }}</p>
+                                <div class="bottom">
+                                    <div class="price">{{ product.formatted_price }} <small>so‘m</small></div>
+                                    <button class="add" type="button" aria-label="{{ product.name }}ni savatga qo‘shish" data-name="{{ product.name }}" data-price="{{ product.price }}">+</button>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                <div class="empty" id="empty">Bu so‘rov bo‘yicha taom topilmadi. Boshqa nom bilan qidirib ko‘ring.</div>
+            </div>
+        </section>
+        <section class="about" id="about">
+            <div class="wrap about-inner">
+                <div><div class="kicker">Biz haqimizda</div><h2>Ta’mida mehr bor.</h2><p>ELDOR FOOD’da har bir taom uy ta’miga bo‘lgan mehr va saralangan masalliqlar bilan tayyorlanadi. Yaxshi taomni yaqinlaringiz bilan baham ko‘ring.</p></div>
+                <div class="about-mark" aria-hidden="true">✳</div>
+            </div>
+        </section>
+    </main>
+    <footer><div class="wrap footer"><strong>🍽 ELDOR FOOD</strong><span>© 2026 ELDOR FOOD. Mazali kunlar tilaymiz!</span></div></footer>
+
+    <div class="backdrop" id="backdrop"></div>
+    <aside class="cart" id="cart" aria-label="Savat" aria-hidden="true">
+        <div class="cart-head"><h2>Savatingiz</h2><button class="close" id="closeCart" type="button" aria-label="Savatni yopish">×</button></div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty">Savatingiz hozircha bo‘sh.</div></div>
+        <div class="total"><div class="total-line"><span>Jami</span><span id="cartTotal">0 so‘m</span></div><button class="checkout" id="checkout" type="button">Buyurtmani rasmiylashtirish</button></div>
+    </aside>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+        (() => {
+            const cards = [...document.querySelectorAll(".food")];
+            const filterButtons = [...document.querySelectorAll(".filter")];
+            const search = document.getElementById("search");
+            const results = document.getElementById("results");
+            const empty = document.getElementById("empty");
+            const cart = new Map();
+            let category = "all";
+            let toastTimer;
+
+            function applyFilters() {
+                const query = search.value.trim().toLocaleLowerCase();
+                let count = 0;
+                cards.forEach((card) => {
+                    const match = (category === "all" || card.dataset.category === category)
+                        && card.dataset.search.toLocaleLowerCase().includes(query);
+                    card.hidden = !match;
+                    if (match) count++;
+                });
+                results.textContent = `${count} ta mazali tanlov`;
+                empty.classList.toggle("show", count === 0);
+            }
+
+            function notify(message) {
+                const toast = document.getElementById("toast");
+                toast.textContent = message;
+                toast.classList.add("show");
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+            }
+
+            function renderCart() {
+                const items = [...cart.values()];
+                document.getElementById("cartCount").textContent = items.reduce((sum, item) => sum + item.quantity, 0);
+                const container = document.getElementById("cartItems");
+                container.replaceChildren();
+                if (!items.length) {
+                    const message = document.createElement("div");
+                    message.className = "cart-empty";
+                    message.textContent = "Savatingiz hozircha bo‘sh.";
+                    container.append(message);
+                }
+                items.forEach((item) => {
+                    const row = document.createElement("div");
+                    row.className = "cart-row";
+                    const details = document.createElement("div");
+                    const title = document.createElement("strong");
+                    title.textContent = `${item.name} × ${item.quantity}`;
+                    const price = document.createElement("span");
+                    price.textContent = `${(item.price * item.quantity).toLocaleString("uz-UZ")} so‘m`;
+                    const remove = document.createElement("button");
+                    remove.className = "remove";
+                    remove.type = "button";
+                    remove.textContent = "O‘chirish";
+                    remove.setAttribute("aria-label", `${item.name}ni savatdan olib tashlash`);
+                    remove.addEventListener("click", () => { cart.delete(item.name); renderCart(); });
+                    details.append(title, price);
+                    row.append(details, remove);
+                    container.append(row);
+                });
+                const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                document.getElementById("cartTotal").textContent = `${total.toLocaleString("uz-UZ")} so‘m`;
+            }
+
+            function toggleCart(open) {
+                document.getElementById("cart").classList.toggle("open", open);
+                document.getElementById("backdrop").classList.toggle("show", open);
+                document.getElementById("cart").setAttribute("aria-hidden", String(!open));
+                document.body.style.overflow = open ? "hidden" : "";
+                if (open) document.getElementById("closeCart").focus();
+            }
+
+            filterButtons.forEach((button) => button.addEventListener("click", () => {
+                category = button.dataset.filter;
+                filterButtons.forEach((item) => {
+                    const selected = item === button;
+                    item.classList.toggle("active", selected);
+                    item.setAttribute("aria-pressed", String(selected));
+                });
+                applyFilters();
+            }));
+            search.addEventListener("input", applyFilters);
+            document.querySelectorAll(".add").forEach((button) => button.addEventListener("click", () => {
+                const name = button.dataset.name;
+                const item = cart.get(name) || { name, price: Number(button.dataset.price), quantity: 0 };
+                item.quantity++;
+                cart.set(name, item);
+                renderCart();
+                notify(`${name} savatga qo‘shildi`);
+            }));
+            document.getElementById("openCart").addEventListener("click", () => toggleCart(true));
+            document.getElementById("closeCart").addEventListener("click", () => toggleCart(false));
+            document.getElementById("backdrop").addEventListener("click", () => toggleCart(false));
+            document.addEventListener("keydown", (event) => { if (event.key === "Escape") toggleCart(false); });
+            document.getElementById("checkout").addEventListener("click", () => {
+                if (!cart.size) { notify("Avval savatga taom qo‘shing."); return; }
+                cart.clear();
+                renderCart();
+                toggleCart(false);
+                notify("Buyurtmangiz qabul qilindi. Rahmat!");
+            });
+
+            document.querySelectorAll("img[data-fallback-label]").forEach((image) => {
+                image.addEventListener("error", () => {
+                    if (image.dataset.fallbackApplied) return;
+                    image.dataset.fallbackApplied = "true";
+                    const label = image.dataset.fallbackLabel.replace(/[<>&]/g, "");
+                    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#183c32"/><stop offset="1" stop-color="#e88947"/></linearGradient></defs><rect width="800" height="600" fill="url(#g)"/><circle cx="400" cy="275" r="132" fill="#fff" fill-opacity=".12"/><text x="400" y="295" text-anchor="middle" font-size="100">🍽</text><text x="400" y="490" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="30" font-weight="bold">${label}</text></svg>`;
+                    image.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
